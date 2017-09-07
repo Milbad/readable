@@ -1,5 +1,4 @@
 import React from 'react'
-//import {  addPost } from '../Actions'
 import  Home  from './Home'
 import  CatPage  from './CatPage'
 import  AddPost  from './AddPost'

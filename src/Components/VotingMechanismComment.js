@@ -1,13 +1,13 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
-import {upVoteComment, downVoteComment} from '../Actions/commentsActions'
+import {voteComment} from '../Actions/commentsActions'
 
 
 class VotingMechanismComment extends React.Component{
 
   render(){
-    const { comment, upVote, downVote } = this.props
+    const { comment, voteComment } = this.props
     return(
 
           <span className= 'col-2 margin-top text-align-center'>
@@ -18,7 +18,7 @@ class VotingMechanismComment extends React.Component{
                   style={{ padding: '5px' , cursor:'pointer'}}
                   onClick={e => {
                     e.preventDefault()
-                    upVoteComment(comment)
+                    voteComment(comment, 'upVote')
                   }}
                 />
               </a>{comment.voteScore}
@@ -29,7 +29,7 @@ class VotingMechanismComment extends React.Component{
                   style={{ padding: '5px', cursor:'pointer' }}
                   onClick={e => {
                     e.preventDefault()
-                    downVoteComment(comment)
+                    voteComment(comment, 'downVote')
                   }}
                 />
               </a>
@@ -39,7 +39,6 @@ class VotingMechanismComment extends React.Component{
 }
 
 const mapStateToProps = (state, props) => {
-  console.log(state)
     return {
       comment: props.comment
     }
@@ -47,8 +46,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      upVoteComment: (comment) => dispatch(upVoteComment(comment)),
-      downVoteComment: (comment) => dispatch(downVoteComment(comment))
+      voteComment: (comment, option) => dispatch(voteComment(comment,option))
     }
 }
 

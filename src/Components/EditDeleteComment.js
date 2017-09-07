@@ -10,7 +10,6 @@ class EditDeleteComment extends React.Component{
 
   render(){
     const { deleteComment, comment} = this.props
-    console.log(comment)
     return(
           <div className='col-4 display-flex'>
             { comment && (
@@ -36,7 +35,6 @@ class EditDeleteComment extends React.Component{
 }
 
 const mapStateToProps = (state, props) => {
-  console.log(props)
   return {
     comment: props.comment,
   }

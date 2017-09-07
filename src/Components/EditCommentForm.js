@@ -2,7 +2,6 @@ import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import * as CommentsActions from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
-import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 
@@ -10,17 +9,20 @@ class EditCommentForm extends React.Component {
 
 
 render () {
-  const { comments, updateComment } = this.props
+  const { comments, updateComment, history } = this.props
 
   return (
     <div>
-    <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
+    <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
+    e.preventDefault()
+    history.goBack()
+  }}>
       <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-    </Link>
+    </a>
     {comments && (
     <div className='center'>
     <h2 className='row text-align-center'>Edit a Comment</h2>
-    <form onSubmit={e => {
+    <form id="formEditComment" onSubmit={e => {
           e.preventDefault();
           let input = {
             id: comments.id,
@@ -36,13 +38,13 @@ render () {
       <div>
         <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={comments.body}></textarea>
       </div>
-      <br/>
-      <div className="input-group">
-        <div className="col-sm-offset-2 col-sm-10">
-          <input type="submit" className='btn' value='Edit'/>
-        </div>
-      </div>
     </form>
+    <button  className='btn btn-form' type="submit" form="formEditComment" aria-label='edit'>
+      <FontAwesome
+        name='fa-pencil-square-o'
+        className='fa-pencil-square-o'
+    /> Edit
+  </button>
     </div>
     )}
   </div>

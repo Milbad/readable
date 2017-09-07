@@ -1,21 +1,23 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
 import {createComment} from '../Actions/commentsActions'
 
 class AddComment extends React.Component {
 
   render(){
-    const { comments, createComment } = this.props
+    const { createComment, history } = this.props
     return (
       <div>
-        <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
+        <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
+        e.preventDefault()
+        history.goBack()
+      }}>
           <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-        </Link>
+        </a>
       <div className='center'>
       <h2 className='row text-align-center'>Add a comment</h2>
-      <form onSubmit={e => {
+      <form id="formAddComment" onSubmit={e => {
             e.preventDefault();
             // Assemble data into object
             let input = {
@@ -25,11 +27,9 @@ class AddComment extends React.Component {
               author: this.refs.authorInput.value,
               parentId: this.props.match.params.parentId
             };
-            console.log(input)
             // Call method from parent component
             // to handle submission
             createComment(input);
-          //  props.submitPost(input);
             // Reset form
             e.target.reset();
           }}
@@ -50,9 +50,13 @@ class AddComment extends React.Component {
               type="text"
               name="body"
               ref='bodyInput' />
-        <br/>
-            <input type="submit" className="btn"/>
       </form>
+      <button  className='btn btn-form' type="submit" form="formAddComment" aria-label='edit'>
+        <FontAwesome
+          name='fa-pencil-square-o'
+          className='fa-pencil-square-o'
+      /> Submit
+    </button>
     </div>
   </div>
     )
@@ -61,14 +65,14 @@ class AddComment extends React.Component {
 // Map state to props
 const mapStateToProps = (state, ownProps) => {
     return {
-      comments: state.comments,
+      comments: state.comments
     }
 }
 
 // Map dispatch to props
 const mapDispatchToProps = (dispatch) => {
     return {
-      createComment: item => dispatch(createComment(item)),
+      createComment: item => dispatch(createComment(item))
     }
 }
 export default (connect(mapStateToProps, mapDispatchToProps)(AddComment));

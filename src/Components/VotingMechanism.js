@@ -1,13 +1,13 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
-import {upVote, downVote} from '../Actions/postsActions'
+import {votePost} from '../Actions/postsActions'
 
 
 class VotingMechanism extends React.Component{
 
   render(){
-    const { post, upVote, downVote } = this.props
+    const { post, votePost } = this.props
     return(
 
           <span className= 'col-2 margin-top text-align-center'>
@@ -18,7 +18,7 @@ class VotingMechanism extends React.Component{
                   style={{ padding: '5px' , cursor:'pointer'}}
                   onClick={e => {
                     e.preventDefault()
-                    upVote(post)
+                    votePost(post, 'upVote')
                   }}
                 />
               </a>{post.voteScore}
@@ -29,7 +29,7 @@ class VotingMechanism extends React.Component{
                   style={{ padding: '5px', cursor:'pointer' }}
                   onClick={e => {
                     e.preventDefault()
-                    downVote(post)
+                    votePost(post, 'downVote')
                   }}
                 />
               </a>
@@ -46,8 +46,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      upVote: (post) => dispatch(upVote(post)),
-      downVote: (post) => dispatch(downVote(post))
+      votePost: (post, option) => dispatch(votePost(post, option))
     }
 }
 

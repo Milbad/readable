@@ -2,7 +2,6 @@ import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import * as PostsActions from '../Actions/postsActions'
 import { withRouter  } from 'react-router'
-import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 
@@ -14,13 +13,16 @@ render () {
 
   return (
     <div>
-    <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
-      <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-    </Link>
+      <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
+      e.preventDefault()
+      this.props.history.goBack()
+    }}>
+        <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
+      </a>
     {post && (
     <div className='center'>
     <h2 className='row text-align-center'>Edit a Post</h2>
-    <form onSubmit={e => {
+    <form   id="formEditPost" onSubmit={e => {
           e.preventDefault();
           let input = {
             id: post.id,
@@ -40,13 +42,13 @@ render () {
       <div>
         <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={post.body}></textarea>
       </div>
-      <br/>
-      <div className="input-group">
-        <div className="col-sm-offset-2 col-sm-10">
-          <input type="submit" className='btn' value='Edit'/>
-        </div>
-      </div>
     </form>
+    <button  className='btn btn-form' type="submit" form="formEditPost" aria-label='edit'>
+      <FontAwesome
+        name='fa-pencil-square-o'
+        className='fa-pencil-square-o'
+    /> Edit
+  </button>
     </div>
     )}
   </div>
@@ -57,7 +59,6 @@ render () {
 
 // Map state to props
 const mapStateToProps = (state, props) => {
-  console.log(props)
   if(props.match.params.post_id) {
     return {
       post: state.posts.find(item =>item.id === props.match.params.post_id)

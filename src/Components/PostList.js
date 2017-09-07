@@ -7,7 +7,6 @@ import  EditDelete  from './EditDelete'
 import  VotingMechanism  from './VotingMechanism'
 
 
-
 const getFilteredPosts = (posts, filter) => {
   if(filter === 'SHOW_ALL') {
       return posts.filter(post => post.deleted === false)
@@ -32,7 +31,7 @@ class PostList extends React.Component{
     return(
       <div className='center'>
       {posts.length === 0 && (
-        <h2>0 post found for that category</h2>
+        <h2>No post found for that category</h2>
       )}
       <ul className='row' >
       {posts.map(post => (
@@ -45,7 +44,9 @@ class PostList extends React.Component{
             <div><i>Posted by {post.author} on {getdate(post.timestamp)}</i></div>
             <div>{getCommentsLength(post, comments)} comments</div>
           </div>
-          <VotingMechanism post={post} />
+          <div className='col-2'>score:
+              <span><VotingMechanism post={post} /></span>
+            </div>
           <EditDelete post={post} />
 
         </li>
@@ -58,7 +59,7 @@ class PostList extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    posts: getFilteredPosts(state.posts, state.filter).sort(sortBy(state.sortBy)),
+    posts: getFilteredPosts(state.posts, state.filter).sort(sortBy('-'+ state.sortBy)),
     comments: state.comments
   }
 }

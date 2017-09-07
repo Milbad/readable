@@ -1,4 +1,4 @@
-import * as actionTypes from './actionsTypes';
+import * as actionTypes from './actionsTypes'
 
 const api = 'http://localhost:5001'
 
@@ -12,83 +12,45 @@ const headers = {
   'Authorization': token
 }
 
-
-
-export const  requestPosts= () => {
-  return {
-    type: actionTypes.REQUEST_POSTS,
-  }
+export const requestPosts = () => {
+  return {type: actionTypes.REQUEST_POSTS}
 }
 
-
-export const  requestPost= () => {
-  return {
-    type: actionTypes.REQUEST_POST,
-  }
+export const requestPost = () => {
+  return {type: actionTypes.REQUEST_POST}
 }
 export const receivePosts = (json) => {
-  return {
-    type: actionTypes.RECEIVE_POSTS,
-    posts: json
-  }
+  return {type: actionTypes.RECEIVE_POSTS, posts: json}
 }
 
-export const increaseScoreSuccess = (post) => {
-  return {
-    type: actionTypes.INCREASE_SCORE,
-    post
-  }
-}
-
-export const decreaseScoreSucess = (post) => {
-  return {
-    type: actionTypes.DECREASE_SCORE,
-    post
-  }
+export const votePostSucess = (post) => {
+  return {type: actionTypes.VOTE_POST, post}
 }
 
 export const createPostSuccess = (post) => {
-  return {
-    type: actionTypes.CREATE_POST_SUCCESS,
-    post
-  }
+  return {type: actionTypes.CREATE_POST_SUCCESS, post}
 }
 export const updatePostSuccess = (post) => {
-  console.log(post)
-  return {
-    type: actionTypes.UPDATE_POST_SUCCESS
-  }
+  return {type: actionTypes.UPDATE_POST_SUCCESS}
 }
 
 export const fetchPostByIdSuccess = (post) => {
-  return {
-    type: actionTypes.FETCH_POST_BY_ID_SUCCESS,
-    post
-  }
+  return {type: actionTypes.FETCH_POST_BY_ID_SUCCESS, post}
 }
 
-export const deletePost = (post) => {
-  return {
-    type: actionTypes.DELETE_POST,
-    post
-  }
+export const deletePost = () => {
+  return {type: actionTypes.DELETE_POST}
 }
 
 export const fetchPosts = (posts) => {
   return (dispatch) => {
 
-    dispatch (requestPosts())
+    dispatch(requestPosts())
 
-    return fetch(`${api}/posts`, { headers })
-    .then(
-        response => response.json(),
-        error => console.log('An error occured.', error)
-      )
-      .then(json =>{
-        dispatch(receivePosts(json))
-      }
+    return fetch(`${api}/posts`, {headers}).then(response => response.json(), error => console.log('An error occured.', error)).then(json => {
+      dispatch(receivePosts(json))
 
-      )
+    })
   }
 }
 
@@ -104,18 +66,19 @@ export const createPost = (input) => {
   return (dispatch) => {
     return fetch(`${api}/posts`, {
       method: 'POST',
-      headers:{
+      headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id, timestamp, title,body,author, category })
-  }).then(
-          res => res.json(),
-          error => console.log('An error occured.', error)
-        )
-    .then(json =>
-      dispatch(createPostSuccess(json))
-    )
+      body: JSON.stringify({
+        id,
+        timestamp,
+        title,
+        body,
+        author,
+        category
+      })
+    }).then(res => res.json(), error => console.log('An error occured.', error)).then(json => dispatch(createPostSuccess(json)), window.alert("Post created!\n You can go back to the posts list or create a new one."))
   }
 }
 
@@ -127,43 +90,28 @@ export const updatePost = (input) => {
   return (dispatch) => {
     return fetch(`${api}/posts/${id}`, {
       method: 'PUT',
-      headers:{
+      headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title,body })
-  }).then(
-          res => res.json(),
-          error => console.log('An error occured.', error)
-        )
-    .then(json =>
-      dispatch(updatePostSuccess(json)),
-      dispatch(fetchPosts())
-    )
+      body: JSON.stringify({title, body})
+    }).then(res => res.json(), error => console.log('An error occured.', error)).then(json => dispatch(updatePostSuccess(json)), dispatch(fetchPosts()), window.alert("Post updated!"))
   }
 }
 
-export const upVote = (post) => {
+export const votePost = (post, option) => {
 
   const id = post.id
-  const option='upVote'
 
   return (dispatch) => {
     return fetch(`${api}/posts/${id}`, {
       method: 'POST',
-      headers:{
+      headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({option})
-  }).then(
-          res => res.json(),
-          error => console.log('An error occured.', error)
-        )
-    .then(json =>
-        dispatch(increaseScoreSuccess(json)),
-        dispatch(fetchPosts())
-    )
+    }).then(res => res.json(), error => console.log('An error occured.', error)).then(json => dispatch(votePostSucess(json)), dispatch(fetchPosts()))
   }
 }
 
@@ -173,81 +121,33 @@ export const deleteItem = (post) => {
     return fetch(`${api}/posts/${id}`, {
       method: 'DELETE',
       headers: headers
-  })
-    .then(json =>
-        dispatch(fetchPosts())
-    )
+    }).then(json => dispatch(deletePost()), dispatch(fetchPosts()))
   }
 }
-
-export const downVote = (post) => {
-
-  const id = post.id
-  const option='downVote'
-
-  return (dispatch) => {
-    return fetch(`${api}/posts/${id}`, {
-      method: 'POST',
-      headers:{
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({option})
-  }).then(
-          res => res.json(),
-          error => console.log('An error occured.', error)
-        )
-    .then(json =>
-        dispatch(decreaseScoreSucess(json)),
-      dispatch(fetchPosts())
-    )
-  }
-}
-
 
 export const fetchPostById = (postId) => {
   return (dispatch) => {
 
-    dispatch (requestPost())
+    dispatch(requestPost())
 
-    return fetch(`${api}/posts/${postId}`, { headers })
-    .then(
-        response => response.json(),
-        error => console.log('An error occured.', error)
-      )
-      .then(json =>
-        dispatch(fetchPostByIdSuccess(json))
-      )
+    return fetch(`${api}/posts/${postId}`, {headers}).then(response => response.json(), error => console.log('An error occured.', error)).then(json => dispatch(fetchPostByIdSuccess(json)))
   }
 }
 //categories
 
-export const  requestCategories= () => {
-  return {
-    type: actionTypes.REQUEST_CATS,
-  }
+export const requestCategories = () => {
+  return {type: actionTypes.REQUEST_CATS}
 }
 
 export const receiveCategories = (json) => {
-  return {
-
-    type: actionTypes.RECEIVE_CATS,
-    categories: json
-  }
+  return {type: actionTypes.RECEIVE_CATS, categories: json}
 }
 
 export const fetchCategories = (cats) => {
   return (dispatch) => {
 
-    dispatch (requestCategories())
+    dispatch(requestCategories())
 
-    return fetch(`${api}/categories`, { headers })
-    .then(
-        response => response.json(),
-        error => console.log('An error occured.', error)
-      )
-      .then(json =>
-        dispatch(receiveCategories(json.categories))
-      )
+    return fetch(`${api}/categories`, {headers}).then(response => response.json(), error => console.log('An error occured.', error)).then(json => dispatch(receiveCategories(json.categories)))
   }
 }

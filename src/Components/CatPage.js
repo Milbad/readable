@@ -1,8 +1,7 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
 import  PostList  from './PostList'
+import  CatList  from './CatList'
 import * as filtersActions from '../Actions/filtersActions'
 import  SortBy  from './SortBy'
 
@@ -16,12 +15,14 @@ class CatPage extends React.Component {
 
   render(){
     return (
-      <div>
-        <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
-          <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-        </Link>
-        <SortBy />
-        <PostList />
+      <div className='row  display-flex'>
+        <div className='col-2 border-right'>
+          <CatList />
+        </div>
+        <div className='col-10'>
+          <SortBy />
+          <PostList />
+        </div>
       </div>
     )
   }

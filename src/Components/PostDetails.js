@@ -9,12 +9,13 @@ import { withRouter } from 'react-router'
 import * as PostsActions from '../Actions/postsActions'
 import  VotingMechanism  from './VotingMechanism'
 
+
+const nonDeletedPost = (posts) => {
+    return posts.filter(post => post.deleted === false)
+}
+
 class PostDetails extends React.Component{
 
-  componentDidMount(){
-   this.props.fetchPostById(this.props.match.params.post_id)
-   //add a fetch coment by id
-}
 
     render(){
       const { post, comments } = this.props
@@ -24,10 +25,15 @@ class PostDetails extends React.Component{
         <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
           <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
         </Link>
+        {!post &&(
+          <h3>No post available</h3>
+        )}
+        {post && (
+        <div>
         <div className='center'>
           <h2 className='row text-align-center'>Post Details</h2>
           <div className=' margin display-flex padding row border'>
-              <div className='col-9'>
+              <div className='col-10'>
                 <h2>{post.title}</h2>
                 <h3>{post.body}</h3>
                 <div><i>Posted by {post.author} on {getdate(post.timestamp)}</i></div>
@@ -39,6 +45,8 @@ class PostDetails extends React.Component{
           </div>
         </div>
         <CommentList comments={comments} post={post}/>
+      </div>
+        )}
     </div>
     )
   }
@@ -46,20 +54,18 @@ class PostDetails extends React.Component{
 }
 // Map state to props
 const mapStateToProps = (state, props) => {
-  console.log(props)
   if(props.match.params.post_id) {
     return {
       comments: state.comments.filter(item =>item.parentId === props.match.params.post_id),
-      post: state.post
-    };
+      post: nonDeletedPost(state.posts).find(post =>post.id === props.match.params.post_id)
+    }
   }
-};
+}
 // Map dispatch to props
 const mapDispatchToProps = (dispatch) => {
     return {
-      fetchPostById: postId => dispatch(PostsActions.fetchPostById(postId)),
-
-    };
-};
+      fetchPostById: postId => dispatch(PostsActions.fetchPostById(postId))
+    }
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetails));

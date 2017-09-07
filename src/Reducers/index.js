@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import {postsReducer, postReducer} from './postReducer'
 import {categoriesReducer} from './catReducer'
-import {commentsReducer, commentsByIdReducer} from './commentsReducer'
+import {commentsReducer} from './commentsReducer'
 import {filterReducer} from './filtersReducer'
-import {sortByReducer} from './sortByReducer'
+import {sortByReducer, sortByCommentReducer } from './sortByReducer'
 
 
 export default combineReducers({
@@ -12,5 +12,6 @@ export default combineReducers({
   comments: commentsReducer,
   post: postReducer,
   sortBy: sortByReducer,
+  sortByComment: sortByCommentReducer,
   filter: filterReducer
 });
