@@ -4,6 +4,7 @@ import  CatPage  from './CatPage'
 import  AddPost  from './AddPost'
 import  AddComment  from './AddComment'
 import PostDetails from './PostDetails'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import EditPostForm from './EditPostForm'
 import EditCommentForm from './EditCommentForm'
 import { Route, Switch} from 'react-router-dom'
@@ -11,6 +12,7 @@ import { Route, Switch} from 'react-router-dom'
 const App =() => (
 
       <div className='container'>
+        <MuiThemeProvider>
         <Switch>
         <Route exact path="/" component={Home} />
         <Route  path='/add' component={AddPost} />
@@ -20,6 +22,7 @@ const App =() => (
         <Route   path='/editcomment/:comment_id' component={EditCommentForm } />
         <Route  exact path='/:category/:post_id' component={PostDetails}/>
         </Switch>
+        </MuiThemeProvider>
       </div>
 )
 

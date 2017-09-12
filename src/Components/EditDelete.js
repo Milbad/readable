@@ -1,9 +1,10 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton'
+import Pencil from 'mui-icons/fontawesome/pencil'
+import Trash from 'mui-icons/fontawesome/trash-o'
 import {deleteItem} from '../Actions/postsActions'
-
 
 
 class EditDelete extends React.Component{
@@ -13,29 +14,28 @@ class EditDelete extends React.Component{
     const {post, deleteItem} = this.props
 
     return(
-
-          <div className='col-4 display-flex'>
-            {post && (
-            <div>
-            <Link  className='btn' aria-label='edit' to={`/edit/${post.id}`}>
-              <FontAwesome
-              name='fa-pencil-square-o'
-              className='fa-pencil-square-o'
-            /> Edit
-          </Link>
-          <a className='btn' aria-label='delete' onClick={e => {
-            e.preventDefault()
-            deleteItem(post)
-          }}> <FontAwesome
-              name='trash-o'
-          className='trash-o'
-           /> Delete</a>
-         </div>
-           )}
+        <div className='col-4'>
+          {post && (
+          <div >
+            <div className='margin'>
+              <RaisedButton style={{width:'120px'}} label='Edit' primary containerElement={<Link to={`/edit/${post.id}`}/>}>
+                <Pencil style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
+              </RaisedButton>
+            </div>
+            <div className='margin'>
+              <RaisedButton style={{width:'120px'}} label='Delete' primary onClick={e => {
+                e.preventDefault()
+                deleteItem(post)
+              }}>
+                <Trash style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
+              </RaisedButton>
+            </div>
           </div>
+          )}
+      </div>
+  )
+}
 
-    )
-  }
 }
 
 const mapStateToProps = (state, props) => {

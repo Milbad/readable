@@ -1,5 +1,7 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
+import RaisedButton from 'material-ui/RaisedButton'
+import Pencil from 'mui-icons/fontawesome/pencil'
+import Trash from 'mui-icons/fontawesome/trash-o'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {deleteComment} from '../Actions/commentsActions'
@@ -11,25 +13,25 @@ class EditDeleteComment extends React.Component{
   render(){
     const { deleteComment, comment} = this.props
     return(
-          <div className='col-4 display-flex'>
-            { comment && (
-            <div className='display-flex'>
-            <Link  className='btn' aria-label='edit' to={`/editcomment/${comment.id}`}>
-              <FontAwesome
-              name='fa-pencil-square-o'
-              className='fa-pencil-square-o'
-            /> Edit
-          </Link>
-          <a className='btn' aria-label='delete' onClick={e => {
-            e.preventDefault()
-            deleteComment(comment)
-          }}> <FontAwesome
-              name='trash-o'
-          className='trash-o'
-           /> Delete</a>
-         </div>
-         )}
+      <div className='col-4'>
+        {comment && (
+        <div className='display-flex'>
+          <div className='margin'>
+            <RaisedButton style={{width:'120px'}} label='Edit' primary containerElement={<Link to={`/editcomment/${comment.id}`}/>}>
+              <Pencil style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
+            </RaisedButton>
           </div>
+          <div className='margin'>
+            <RaisedButton  style={{width:'120px'}} label='Delete' primary onClick={e => {
+              e.preventDefault()
+              deleteComment(comment)
+            }}>
+              <Trash style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
+            </RaisedButton>
+          </div>
+        </div>
+        )}
+      </div>
     )
   }
 }
