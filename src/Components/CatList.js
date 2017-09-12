@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link} from 'react-router-dom'
+import AppBar from 'material-ui/AppBar'
+import Tabs from 'material-ui/Tabs'
+import Tab from 'material-ui/Tabs/Tab'
 import * as filtersActions from '../Actions/filtersActions'
 
 class CatList extends React.Component{
@@ -8,17 +11,25 @@ class CatList extends React.Component{
   render(){
     const { setFilter, categories } = this.props
     return(
-        <div className='center'>
-          <h2 className='title-cat'> Categories</h2>
-          <Link className='btn' to={`/`} onClick={() => {
-          setFilter('SHOW_ALL')
-        }}>SHOW ALL</Link>
+
+          <Tabs  style={{width: '70%'}} onChange={value => {
+            setFilter(value)
+          }}>
+              <Tab  key='SHOW_ALL'
+                    label='show all'
+                    value='SHOW_ALL'
+                    containerElement={<Link to={`/`}/>}
+                    onClick={() => {
+            setFilter('SHOW_ALL')
+          }}/>
           {categories.map(cat => (
-            <Link key={cat.name}  className='btn' to={`/${cat.name}`} onClick={() => {
-            setFilter(cat.name)
-          }}>{(cat.name).toUpperCase()}</Link>
+              <Tab  key={cat.name}
+                    label={cat.name}
+                    containerElement={<Link to={`/${cat.name}`}/>}
+                    value= {cat.name} />
             ))}
-        </div>
+            </Tabs>
+
     )
   }
 }

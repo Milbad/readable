@@ -4,6 +4,7 @@ import  PostList  from './PostList'
 import  CatList  from './CatList'
 import * as filtersActions from '../Actions/filtersActions'
 import  SortBy  from './SortBy'
+import AppBar from 'material-ui/AppBar'
 
 class CatPage extends React.Component {
 
@@ -15,11 +16,9 @@ class CatPage extends React.Component {
 
   render(){
     return (
-      <div className='row  display-flex'>
-        <div className='col-2 border-right'>
-          <CatList />
-        </div>
-        <div className='col-10'>
+      <div>
+        <AppBar title='CATEGORIES'  titleStyle={{height: '45px', lineHeight:'45px'}} showMenuIconButton={false} children={<CatList/>}/>
+        <div className='row'>
           <SortBy />
           <PostList />
         </div>
