@@ -3,6 +3,8 @@ import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {createPost} from '../Actions/postsActions'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Back from 'mui-icons/fontawesome/arrow-left'
 
 
 class AddPost extends React.Component {
@@ -12,8 +14,8 @@ class AddPost extends React.Component {
     return (
       <div>
 
-        <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
-          <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
+        <Link to='/'>
+          <FloatingActionButton mini children={<Back/>}/>
         </Link>
       <div className='center'>
       <h2 className='row text-align-center'>Add a Post</h2>

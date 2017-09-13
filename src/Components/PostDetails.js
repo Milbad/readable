@@ -4,11 +4,12 @@ import  CommentList  from './CommentList'
 import { connect } from 'react-redux'
 import { Link} from 'react-router-dom'
 import { getdate } from '../Utils/helpers'
-import FontAwesome from 'react-fontawesome'
 import { withRouter } from 'react-router'
 import * as PostsActions from '../Actions/postsActions'
 import  VotingMechanism  from './VotingMechanism'
 import Paper from 'material-ui/Paper'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Back from 'mui-icons/fontawesome/arrow-left'
 
 
 const nonDeletedPost = (posts) => {
@@ -23,8 +24,8 @@ class PostDetails extends React.Component{
 
     return(
       <div>
-        <Link style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} to='/'>
-          <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
+        <Link to='/'>
+          <FloatingActionButton mini children={<Back/>}/>
         </Link>
         {!post &&(
           <h3>No post available</h3>

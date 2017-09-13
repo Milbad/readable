@@ -3,7 +3,8 @@ import FontAwesome from 'react-fontawesome'
 import * as CommentsActions from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
-
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Back from 'mui-icons/fontawesome/arrow-left'
 
 class EditCommentForm extends React.Component {
 
@@ -13,16 +14,13 @@ render () {
 
   return (
     <div>
-    <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
-    e.preventDefault()
-    history.goBack()
-  }}>
-      <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-    </a>
-    {comments && (
-    <div className='center'>
-    <h2 className='row text-align-center'>Edit a Comment</h2>
-    <form id="formEditComment" onSubmit={e => {
+      <FloatingActionButton mini children={<Back/>} onClick={() => {
+      history.goBack()
+    }}/>
+      {comments && (
+        <div className='center'>
+          <h2 className='row text-align-center'>Edit a Comment</h2>
+          <form id="formEditComment" onSubmit={e => {
           e.preventDefault();
           let input = {
             id: comments.id,
@@ -33,12 +31,12 @@ render () {
             e.target.reset();
 
         }} >
-      <br/>
-      <label  htmlFor="body"><b>Body</b></label>
-      <div>
-        <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={comments.body}></textarea>
-      </div>
-    </form>
+        <br/>
+        <label  htmlFor="body"><b>Body</b></label>
+        <div>
+          <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={comments.body}></textarea>
+        </div>
+      </form>
     <button  className='btn btn-form' type="submit" form="formEditComment" aria-label='edit'>
       <FontAwesome
         name='fa-pencil-square-o'

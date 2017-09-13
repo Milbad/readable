@@ -2,6 +2,8 @@ import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import { connect } from 'react-redux'
 import {createComment} from '../Actions/commentsActions'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Back from 'mui-icons/fontawesome/arrow-left'
 
 class AddComment extends React.Component {
 
@@ -9,12 +11,9 @@ class AddComment extends React.Component {
     const { createComment, history } = this.props
     return (
       <div>
-        <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
-        e.preventDefault()
+        <FloatingActionButton mini children={<Back/>} onClick={() => {
         history.goBack()
-      }}>
-          <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-        </a>
+      }}/>
       <div className='center'>
       <h2 className='row text-align-center'>Add a comment</h2>
       <form id="formAddComment" onSubmit={e => {

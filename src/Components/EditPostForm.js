@@ -3,7 +3,8 @@ import FontAwesome from 'react-fontawesome'
 import * as PostsActions from '../Actions/postsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
-
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Back from 'mui-icons/fontawesome/arrow-left'
 
 class EditPostForm extends React.Component {
 
@@ -13,12 +14,9 @@ render () {
 
   return (
     <div>
-      <a style={{fontSize: '30px' ,textDecoration: 'none', color:'dodgerblue' }} onClick={e => {
-      e.preventDefault()
+      <FloatingActionButton mini children={<Back/>} onClick={() => {
       this.props.history.goBack()
-    }}>
-        <FontAwesome name='fa-arrow-circle-left' className='fa-arrow-circle-left' />
-      </a>
+    }}/>
     {post && (
     <div className='center'>
     <h2 className='row text-align-center'>Edit a Post</h2>
