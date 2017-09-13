@@ -41,7 +41,7 @@ class CommentList extends React.Component{
               </div>
             </div>
           )}
-                        <RaisedButton  fullWidth={true} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
+      <RaisedButton  fullWidth={true} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
         </div>
     </div>
     )

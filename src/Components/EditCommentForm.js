@@ -22,29 +22,16 @@ render () {
       {comments && (
         <div className='center'>
           <h2 className='row text-align-center'>Edit a Comment</h2>
-          <form id="formEditComment" onSubmit={e => {
-          e.preventDefault();
-          let input = {
-            id: comments.id,
-            parentId: comments.parentId,
-            body: this.refs.bodyInput.value
-          };
-            updateComment(input);
-            e.target.reset();
-
-        }} >
-        <br/>
         <label  htmlFor="body"><b>Body</b></label>
-        <div>
-          <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={comments.body}></textarea>
-        </div>
-      </form>
-    <button  className='btn btn-form' type="submit" form="formEditComment" aria-label='edit'>
-      <FontAwesome
-        name='fa-pencil-square-o'
-        className='fa-pencil-square-o'
-    /> Edit
-  </button>
+        <TextField multiLine={true}  name='bodyInput' ref='bodyInput' defaultValue={comments.body} fullWidth={true}/>
+      <RaisedButton primary type="submit" label='submit' onClick={()=> {
+        let input = {
+          id: comments.id,
+          parentId: comments.parentId,
+          body: this.refs.bodyInput.input.refs.input.value
+        };
+        updateComment(input);
+      }}/>
     </div>
     )}
   </div>
