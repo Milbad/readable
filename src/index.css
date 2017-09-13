@@ -162,9 +162,8 @@ input, textarea, select {
 }
 .btn-add {
   position: fixed;
-  right: 20px;
-  bottom: 5px;
-  height: 30px;
+  right: 10px;
+  bottom: 0px;
 }
 
 .open-add a {

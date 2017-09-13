@@ -22,11 +22,11 @@ class CommentList extends React.Component{
           {comments.length !== 0 && (
             <div>
               <SortByComment />
-              <h3 className='title row text-align-left'>Comments for this post</h3>
+              <h3 className='title text-align-left'>Comments for this post</h3>
               <div>
-                <ol className='row'>
+                <ol>
                   {comments.map(comment => (
-                    <li className='margin display-flex padding row' key={comment.id}>
+                    <li className='margin display-flex padding' key={comment.id}>
                       <div className='col-9'>
                         <div>{comment.body}</div>
                         <div><i>Posted by {comment.author} on {getdate(comment.timestamp)}</i></div>
@@ -37,10 +37,10 @@ class CommentList extends React.Component{
                     </li>
                   ))}
                 </ol>
+                <RaisedButton  fullWidth={true} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
               </div>
             </div>
           )}
-          <RaisedButton className='btn-add' style={{width:'150px'}} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
         </div>
     </div>
     )
