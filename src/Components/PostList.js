@@ -7,6 +7,7 @@ import  EditDelete  from './EditDelete'
 import  VotingMechanism  from './VotingMechanism'
 
 
+
 const getFilteredPosts = (posts, filter) => {
   if(filter === 'SHOW_ALL') {
       return posts.filter(post => post.deleted === false)

@@ -5,6 +5,7 @@ import sortBy from 'sort-by'
 import { connect } from 'react-redux'
 import { Link} from 'react-router-dom'
 import { getdate } from '../Utils/helpers'
+import RaisedButton from 'material-ui/RaisedButton'
 import  VotingMechanismComment  from './VotingMechanismComment'
 
 class CommentList extends React.Component{
@@ -39,9 +40,7 @@ class CommentList extends React.Component{
               </div>
             </div>
           )}
-          <button className='btn btn-add'>
-            <Link  style={{textDecoration: 'none', color:'white' }} to={`/addcomment/${post.id}`} >Add a comment</Link>
-          </button>
+          <RaisedButton className='btn-add' style={{width:'150px'}} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
         </div>
     </div>
     )

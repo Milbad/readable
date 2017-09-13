@@ -12,7 +12,7 @@ class Home extends React.Component{
     return(
       <div>
         <CatPage />
-          <RaisedButton className='btn-add' style={{width:'120px'}} label='Add a post' primary containerElement={<Link to={`/add`}/>}/>
+        <RaisedButton className='btn-add' style={{width:'120px'}} label='Add a post' primary containerElement={<Link to={`/add`}/>}/>
       </div>
     )
   }

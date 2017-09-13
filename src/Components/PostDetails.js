@@ -8,6 +8,7 @@ import FontAwesome from 'react-fontawesome'
 import { withRouter } from 'react-router'
 import * as PostsActions from '../Actions/postsActions'
 import  VotingMechanism  from './VotingMechanism'
+import Paper from 'material-ui/Paper'
 
 
 const nonDeletedPost = (posts) => {
@@ -30,9 +31,9 @@ class PostDetails extends React.Component{
         )}
         {post && (
         <div>
-        <div className='center'>
+        <Paper className='center'>
           <h2 className='row text-align-center'>Post Details</h2>
-          <div className=' margin display-flex padding row border'>
+          <div className=' margin display-flex padding row '>
               <div className='col-10'>
                 <h2>{post.title}</h2>
                 <h3>{post.body}</h3>
@@ -43,7 +44,7 @@ class PostDetails extends React.Component{
             </div>
             <EditDelete post={post} />
           </div>
-        </div>
+        </Paper>
         <CommentList comments={comments} post={post}/>
       </div>
         )}
