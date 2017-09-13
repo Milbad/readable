@@ -1,6 +1,5 @@
 import React from 'react'
 import  Home  from './Home'
-import  CatPage  from './CatPage'
 import  AddPost  from './AddPost'
 import  AddComment  from './AddComment'
 import PostDetails from './PostDetails'
@@ -17,7 +16,7 @@ const App =() => (
         <Route exact path="/" component={Home} />
         <Route  path='/add' component={AddPost} />
         <Route  path='/addcomment/:parentId' component={AddComment} />
-        <Route exact path='/:category' component={CatPage} />
+        <Route exact path='/:category' component={Home} />
         <Route   path='/edit/:post_id' component={EditPostForm } />
         <Route   path='/editcomment/:comment_id' component={EditCommentForm } />
         <Route  exact path='/:category/:post_id' component={PostDetails}/>

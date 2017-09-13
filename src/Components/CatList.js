@@ -8,20 +8,19 @@ import * as filtersActions from '../Actions/filtersActions'
 
 class CatList extends React.Component{
 
+
   render(){
     const { setFilter, categories } = this.props
     return(
-
-          <Tabs  style={{width: '70%'}} onChange={value => {
+        <AppBar title='CATEGORIES'  titleStyle={{height: '45px', lineHeight:'45px'}} showMenuIconButton={false} >
+          <Tabs  style={{width: '70%'}} onChange={(value, index, index2) => {
             setFilter(value)
           }}>
               <Tab  key='SHOW_ALL'
                     label='show all'
                     value='SHOW_ALL'
                     containerElement={<Link to={`/`}/>}
-                    onClick={() => {
-            setFilter('SHOW_ALL')
-          }}/>
+                    />
           {categories.map(cat => (
               <Tab  key={cat.name}
                     label={cat.name}
@@ -29,6 +28,7 @@ class CatList extends React.Component{
                     value= {cat.name} />
             ))}
             </Tabs>
+        </AppBar>
 
     )
   }

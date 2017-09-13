@@ -2,23 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as filtersActions from '../Actions/filtersActions'
-import  PostList  from './PostList'
-import  CatList  from './CatList'
-import AppBar from 'material-ui/AppBar'
-import  SortBy  from './SortBy'
+import  CatPage from './CatPage'
 
 
 class Home extends React.Component{
 
   render(){
-
     return(
       <div>
-        <AppBar title='CATEGORIES'  titleStyle={{height: '48px', lineHeight:'48px'}} showMenuIconButton={false} children={<CatList/>}/>
-        <div className='row'>
-          <SortBy />
-          <PostList />
-        </div>
+        <CatPage />
           <button className='btn btn-add'>
             <Link  style={{textDecoration: 'none', color:'white' }} to={`/add`}>Add a post</Link>
           </button>
