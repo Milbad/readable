@@ -4,7 +4,9 @@ import * as CommentsActions from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import TextField from 'material-ui/TextField'
 import Back from 'mui-icons/fontawesome/arrow-left'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class EditCommentForm extends React.Component {
 

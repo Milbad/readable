@@ -5,7 +5,7 @@ import sortBy from 'sort-by'
 import { getdate } from '../Utils/helpers'
 import  EditDelete  from './EditDelete'
 import  VotingMechanism  from './VotingMechanism'
-
+import Comment from 'mui-icons/fontawesome/comment-o'
 
 
 const getFilteredPosts = (posts, filter) => {
@@ -43,7 +43,7 @@ class PostList extends React.Component{
             <h3 >{post.title}</h3>
             </Link>
             <div><i>Posted by {post.author} on {getdate(post.timestamp)}</i></div>
-            <div>{getCommentsLength(post, comments)} comments</div>
+            <div>{getCommentsLength(post, comments)} <Comment style={{height:'18px', width:'18px'}} /></div>
           </div>
           <div className='col-2'>score:
               <span><VotingMechanism post={post} /></span>

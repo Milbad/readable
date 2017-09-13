@@ -1,5 +1,4 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import * as PostsActions from '../Actions/postsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
@@ -27,7 +26,7 @@ render () {
       <br/>
       <label  htmlFor="body"><b>Body</b></label>
       <TextField multiLine={true}  name='bodyInput' ref='bodyInput' defaultValue={post.body} fullWidth={true}/>
-    <RaisedButton primary type="submit" label='EDIT' onClick={()=> {
+    <RaisedButton primary type="submit" label='submit' onClick={()=> {
       let input = {
         id: post.id,
         title: this.refs.titleInput.input.value,

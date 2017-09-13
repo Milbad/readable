@@ -10,6 +10,7 @@ import  VotingMechanism  from './VotingMechanism'
 import Paper from 'material-ui/Paper'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Back from 'mui-icons/fontawesome/arrow-left'
+import Comment from 'mui-icons/fontawesome/comment-o'
 
 
 const nonDeletedPost = (posts) => {
@@ -41,7 +42,7 @@ class PostDetails extends React.Component{
                 <div><i>Posted by {post.author} on {getdate(post.timestamp)}</i></div>
                 <div>Category: {post.category}</div>
                 <span>Current score:<VotingMechanism post={post} /></span>
-                <div>{comments.length} comments</div>
+                <div>{comments.length} <Comment style={{height:'18px', width:'18px'}} /></div>
             </div>
             <EditDelete post={post} />
           </div>

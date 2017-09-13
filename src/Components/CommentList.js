@@ -37,10 +37,11 @@ class CommentList extends React.Component{
                     </li>
                   ))}
                 </ol>
-                <RaisedButton  fullWidth={true} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
+
               </div>
             </div>
           )}
+                        <RaisedButton  fullWidth={true} label='Add a comment' primary containerElement={<Link to={`/addcomment/${post.id}`}/>}/>
         </div>
     </div>
     )
