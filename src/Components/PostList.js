@@ -32,7 +32,7 @@ class PostList extends React.Component{
     return(
       <div className='center'>
       {posts.length === 0 && (
-        <h2>No post found for that category</h2>
+        <h2 style={{paddingTop: '40px'}}>No post found for that category</h2>
       )}
       <ul className='row' >
       {posts.map(post => (

@@ -32,9 +32,9 @@ class PostDetails extends React.Component{
         {post && (
         <div>
         <Paper className='center'>
-          <h2 className='row text-align-center'>Post Details</h2>
+          <h2 className='row text-align-center' style={{padding: '10px'}}>Post Details</h2>
           <div className=' margin display-flex padding row '>
-              <div className='col-10'>
+              <div className='col-9'>
                 <h2>{post.title}</h2>
                 <h3>{post.body}</h3>
                 <div><i>Posted by {post.author} on {getdate(post.timestamp)}</i></div>

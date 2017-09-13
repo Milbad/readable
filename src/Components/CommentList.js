@@ -21,8 +21,8 @@ class CommentList extends React.Component{
           )}
           {comments.length !== 0 && (
             <div>
-              <SortByComment />
               <h3 className='title text-align-left'>Comments for this post</h3>
+              <SortByComment />
               <div>
                 <ol>
                   {comments.map(comment => (

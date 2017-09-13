@@ -16,7 +16,7 @@ class EditDelete extends React.Component{
     return(
         <div className='col-4'>
           {post && (
-          <div >
+          <div className='margin display-flex'>
             <div className='margin'>
               <RaisedButton style={{width:'120px'}} label='Edit' primary containerElement={<Link to={`/edit/${post.id}`}/>}>
                 <Pencil style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
