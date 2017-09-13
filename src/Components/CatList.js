@@ -12,7 +12,7 @@ class CatList extends React.Component{
   render(){
     const { setFilter, categories } = this.props
     return(
-        <AppBar title='CATEGORIES'  titleStyle={{height: '45px', lineHeight:'45px'}} showMenuIconButton={false} >
+        <AppBar style={{position:'fixed', top:'0', left:'0'}} title='CATEGORIES'  titleStyle={{height: '45px', lineHeight:'45px'}} showMenuIconButton={false} >
           <Tabs  style={{width: '70%'}} onChange={(value, index, index2) => {
             setFilter(value)
           }}>
