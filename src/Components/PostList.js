@@ -36,7 +36,7 @@ class PostList extends React.Component{
       )}
       <ul className='row' >
       {posts.map(post => (
-        <li key={post.id} className=' margin display-flex padding row border-bottom'>
+        <li key={post.id} className='display-flex padding row border-bottom'>
 
           <div className='col-6'>
             <Link style={{ textDecoration: 'none' , color:'black'}} className='post-title' to={`/${post.category}/${post.id}`}>

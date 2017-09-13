@@ -4,7 +4,9 @@ import * as PostsActions from '../Actions/postsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import TextField from 'material-ui/TextField'
 import Back from 'mui-icons/fontawesome/arrow-left'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class EditPostForm extends React.Component {
 
@@ -20,33 +22,20 @@ render () {
     {post && (
     <div className='center'>
     <h2 className='row text-align-center'>Edit a Post</h2>
-    <form   id="formEditPost" onSubmit={e => {
-          e.preventDefault();
-          let input = {
-            id: post.id,
-            title: this.refs.titleInput.value,
-            body: this.refs.bodyInput.value
-          };
-            updatePost(input);
-            e.target.reset();
-
-        }} >
       <label htmlFor="title"><b>Title</b></label>
-      <div>
-        <input className='row' ref='titleInput' type='text' defaultValue={post.title} size='52'/>
-      </div>
+      <TextField name='titleInput' ref='titleInput' defaultValue={post.title} fullWidth={true}/>
       <br/>
       <label  htmlFor="body"><b>Body</b></label>
-      <div>
-        <textarea className='row'   rows="4" cols="50" ref='bodyInput' type='text' defaultValue={post.body}></textarea>
-      </div>
-    </form>
-    <button  className='btn btn-form' type="submit" form="formEditPost" aria-label='edit'>
-      <FontAwesome
-        name='fa-pencil-square-o'
-        className='fa-pencil-square-o'
-    /> Edit
-  </button>
+      <TextField multiLine={true}  name='bodyInput' ref='bodyInput' defaultValue={post.body} fullWidth={true}/>
+    <RaisedButton primary type="submit" label='EDIT' onClick={()=> {
+      let input = {
+        id: post.id,
+        title: this.refs.titleInput.input.value,
+        body: this.refs.bodyInput.input.refs.input.value
+      };
+
+      updatePost(input);
+    }}/>
     </div>
     )}
   </div>
