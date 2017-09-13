@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as filtersActions from '../Actions/filtersActions'
 import  CatPage from './CatPage'
+import RaisedButton from 'material-ui/RaisedButton'
 
 
 class Home extends React.Component{
@@ -11,9 +12,7 @@ class Home extends React.Component{
     return(
       <div>
         <CatPage />
-          <button className='btn btn-add'>
-            <Link  style={{textDecoration: 'none', color:'white' }} to={`/add`}>Add a post</Link>
-          </button>
+          <RaisedButton className='btn-add' style={{width:'120px'}} label='Add a post' primary containerElement={<Link to={`/add`}/>}/>
       </div>
     )
   }
