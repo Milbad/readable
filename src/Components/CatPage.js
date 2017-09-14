@@ -9,19 +9,17 @@ import  SortBy  from './SortBy'
 class CatPage extends React.Component {
 
   componentDidMount(){
-    if (this.props.match) {
-      this.props.setFilter(this.props.match.params.category)
-    }
+    this.props.match ?
+    this.props.setFilter(this.props.match.params.category):
+    this.props.setFilter('SHOW_ALL');
   }
 
   render(){
     return (
       <div>
         <CatList/>
-        <div className='row'>
-          <SortBy />
-          <PostList />
-        </div>
+        <SortBy />
+        <PostList />
       </div>
     )
   }

@@ -34,7 +34,7 @@ class PostList extends React.Component{
       {posts.length === 0 && (
         <h2 style={{paddingTop: '40px'}}>No post found for that category</h2>
       )}
-      <ul className='row' >
+      <ul >
       {posts.map(post => (
         <li key={post.id} className='display-flex padding row border-bottom'>
 

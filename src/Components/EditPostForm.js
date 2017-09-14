@@ -32,7 +32,6 @@ render () {
         title: this.refs.titleInput.input.value,
         body: this.refs.bodyInput.input.refs.input.value
       };
-
       updatePost(input);
     }}/>
     </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import * as CommentsActions from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
