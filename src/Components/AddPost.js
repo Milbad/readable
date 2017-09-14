@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-//import {createPost} from '../Actions/postsActions'
 import * as actions from '../Actions/postsActions'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Back from 'mui-icons/fontawesome/arrow-left'
@@ -9,38 +8,49 @@ import RaisedButton from 'material-ui/RaisedButton'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
-import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 
 
 const required = value => (value ? undefined : 'Required')
 
 
-
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+const renderTextField = ({ input, label, meta: { touched, error } }) => (
   <TextField hintText={label}
     floatingLabelText={label}
+    fullWidth
     errorText={touched && error}
     {...input}
-    {...custom}
+
   />
 )
 
-const renderSelectField = ({ input, ref, label, meta: { touched, error }, children, ...custom }) => (
+const renderTextFieldBody = ({ input, label, meta: { touched, error } }) => (
+  <TextField hintText={label}
+    floatingLabelText={label}
+    fullWidth
+    multiLine
+    errorText={touched && error}
+    {...input}
+  />
+)
+
+const renderSelectField = ({ input, ref, label, meta: { touched, error }, children}) => (
   <SelectField
+    fullWidth
     ref= {ref}
     floatingLabelText={label}
     errorText={touched && error}
     {...input}
     onChange={(event, index, value) => input.onChange(value)}
     children={children}
-    {...custom}/>
+    />
 )
 
 class AddPost extends React.Component {
 
 
   render(){
-    const { valid, categories, createPost,reset, submitting } = this.props
+    const { valid, categories, createPost, reset } = this.props
 
     return (
 
@@ -58,7 +68,7 @@ class AddPost extends React.Component {
          <Field  validate={required} ref='authorInput' name="author" component={renderTextField} label="Author"/>
        </div>
        <div>
-        <Field  validate={required} ref='bodyInput' name="body" component={renderTextField} label="Body"/>
+        <Field  validate={required} ref='bodyInput' name="body" component={renderTextFieldBody} label="Body"/>
       </div>
       <div>
          <Field  validate={required} ref='categoryInput' name="category" component={renderSelectField} label="Category">
@@ -72,6 +82,7 @@ class AddPost extends React.Component {
 
 
     <RaisedButton primary disabled={!valid? true:false} type="submit" label='submit' onClick={()=> {
+
       let input = {
         id: Math.random().toString(36).substr(-8),
         timestamp: Date.now(),
@@ -81,6 +92,7 @@ class AddPost extends React.Component {
         category: this.refs.categoryInput.value
       }
       createPost(input)
+      reset()
     }}/>
     </div>
   </div>
