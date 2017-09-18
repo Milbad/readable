@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as filtersActions from '../Actions/filtersActions'
+import {setSortBy} from '../Actions/filtersActions'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
@@ -28,11 +28,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      setSortBy: str => dispatch(filtersActions.setSortBy(str)),
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortBy)
+export default connect(mapStateToProps, {setSortBy})(SortBy)

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Link} from 'react-router-dom'
 import { getdate } from '../Utils/helpers'
 import { withRouter } from 'react-router'
-import * as PostsActions from '../Actions/postsActions'
+import {fetchPostById} from '../Actions/postsActions'
 import  VotingMechanism  from './VotingMechanism'
 import Paper from 'material-ui/Paper'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -64,11 +64,6 @@ const mapStateToProps = (state, props) => {
     }
   }
 }
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      fetchPostById: postId => dispatch(PostsActions.fetchPostById(postId))
-    }
-}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetails));
+
+export default withRouter(connect(mapStateToProps, {fetchPostById})(PostDetails));

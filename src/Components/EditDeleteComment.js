@@ -42,12 +42,7 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      deleteComment: (comment) => dispatch(deleteComment(comment))
-    }
-}
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditDeleteComment)
+export default connect(mapStateToProps, {deleteComment})(EditDeleteComment)

@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link} from 'react-router-dom'
+import {setFilter} from '../Actions/filtersActions'
 import AppBar from 'material-ui/AppBar'
 import Tabs from 'material-ui/Tabs'
 import Tab from 'material-ui/Tabs/Tab'
-import * as filtersActions from '../Actions/filtersActions'
+
 
 class CatList extends React.Component{
 
@@ -41,10 +42,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      setFilter: cat => dispatch(filtersActions.setFilter(cat))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CatList)
+export default connect(mapStateToProps, {setFilter})(CatList);

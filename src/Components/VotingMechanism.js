@@ -44,12 +44,7 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      votePost: (post, option) => dispatch(votePost(post, option))
-    }
-}
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(VotingMechanism)
+export default connect(mapStateToProps, {votePost})(VotingMechanism)

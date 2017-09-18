@@ -79,10 +79,5 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      createComment: item => dispatch(createComment(item))
-    }
-}
-export default (connect(mapStateToProps, mapDispatchToProps)(AddComment));
+
+export default connect(mapStateToProps, {createComment})(AddComment);

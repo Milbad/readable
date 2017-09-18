@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-import * as actions from '../Actions/postsActions'
+import {createPost} from '../Actions/postsActions'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Back from 'mui-icons/fontawesome/arrow-left'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -113,10 +113,5 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      createPost: item => dispatch(actions.createPost(item)),
-    }
-}
-export default (connect(mapStateToProps, mapDispatchToProps )(AddPost));
+
+export default connect(mapStateToProps, {createPost})(AddPost);

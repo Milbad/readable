@@ -1,5 +1,5 @@
 import React from 'react'
-import * as CommentsActions from '../Actions/commentsActions'
+import {updateComment} from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -91,12 +91,6 @@ EditCommentForm = reduxForm({
   form: 'editCommentForm'
 })(EditCommentForm)
 
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      updateComment: items => dispatch(CommentsActions.updateComment(items))
-    }
-}
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditCommentForm));
+export default withRouter(connect(mapStateToProps, {updateComment})(EditCommentForm));

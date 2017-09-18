@@ -1,5 +1,5 @@
 import React from 'react'
-import * as PostsActions from '../Actions/postsActions'
+import {updatePost} from '../Actions/postsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -65,7 +65,7 @@ render () {
     <form >
       <div>
       <Field validate={required}
-        ref='titleInput' name="title" component={renderTextFieldBody} label="Title" />
+        ref='titleInput' name="title" component={renderTextField} label="Title" />
       </div>
       <div>
       <Field validate={required}
@@ -109,12 +109,6 @@ EditPostForm = reduxForm({
   form: 'editPostForm'
 })(EditPostForm)
 
-// Map dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-      updatePost: items => dispatch(PostsActions.updatePost(items))
-    }
-}
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPostForm));
+export default withRouter(connect(mapStateToProps, {updatePost})(EditPostForm));
