@@ -6,12 +6,53 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import TextField from 'material-ui/TextField'
 import Back from 'mui-icons/fontawesome/arrow-left'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Field, reduxForm } from 'redux-form'
 
+const required = value => (value ? undefined : 'Required')
+
+const getBody = (posts,id) => {
+  if(posts && id){
+    let bodyInit = posts.find(item =>item.id === id)
+    if (bodyInit){
+      return(bodyInit.body)
+    }
+  }
+}
+
+const getTitle = (posts,id) => {
+  if(posts && id){
+    let titleInit = posts.find(item =>item.id === id)
+    if (titleInit){
+      return(titleInit.title)
+    }
+  }
+}
+
+const renderTextFieldBody = ({ input, label, meta: { touched, error } }) => (
+    <TextField
+      hintText={label}
+      multiLine={true}
+      fullWidth={true}
+      floatingLabelText={label}
+      errorText={touched && error}
+      {...input}
+  />
+  )
+
+  const renderTextField = ({ input, label, meta: { touched, error } }) => (
+      <TextField
+        hintText={label}
+        fullWidth={true}
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+    />
+    )
 class EditPostForm extends React.Component {
 
 
 render () {
-  const { post, updatePost } = this.props
+  const { valid, post, updatePost } = this.props
 
   return (
     <div>
@@ -21,19 +62,25 @@ render () {
     {post && (
     <div className='center'>
     <h2 className='row text-align-center'>Edit a Post</h2>
-      <label htmlFor="title"><b>Title</b></label>
-      <TextField name='titleInput' ref='titleInput' defaultValue={post.title} fullWidth={true}/>
-      <br/>
-      <label  htmlFor="body"><b>Body</b></label>
-      <TextField multiLine={true}  name='bodyInput' ref='bodyInput' defaultValue={post.body} fullWidth={true}/>
-    <RaisedButton primary type="submit" label='submit' onClick={()=> {
+    <form >
+      <div>
+      <Field validate={required}
+        ref='titleInput' name="title" component={renderTextFieldBody} label="Title" />
+      </div>
+      <div>
+      <Field validate={required}
+        ref='bodyInput' name="body" component={renderTextFieldBody} label="Body" />
+      </div>
+    </form>
+    <RaisedButton disabled={!valid? true:false} primary type="submit" label='submit' onClick={()=> {
       let input = {
         id: post.id,
-        title: this.refs.titleInput.input.value,
-        body: this.refs.bodyInput.input.refs.input.value
+        title: this.refs.titleInput.value,
+        body: this.refs.bodyInput.value
       };
       updatePost(input);
     }}/>
+
     </div>
     )}
   </div>
@@ -44,12 +91,24 @@ render () {
 
 // Map state to props
 const mapStateToProps = (state, props) => {
-  if(props.match.params.post_id) {
+  let body = getBody(state.posts, props.match.params.post_id)
+  let title = getTitle(state.posts, props.match.params.post_id)
+  if(props.match.params.post_id && title) {
     return {
-      post: state.posts.find(item =>item.id === props.match.params.post_id)
+      post: state.posts.find(item =>item.id === props.match.params.post_id),
+      initialValues: {title,body}
     }
   }
+  else {
+    return {
+     posts: state.posts.find(item =>item.id === props.match.params.post_id),
+   }
+  }
 }
+EditPostForm = reduxForm({
+  form: 'editPostForm'
+})(EditPostForm)
+
 // Map dispatch to props
 const mapDispatchToProps = (dispatch) => {
     return {

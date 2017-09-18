@@ -20,7 +20,7 @@ const getBody = (comments,id) => {
   }
 }
 
-const renderTextFieldBody = ({ body, input, label, meta: { touched, error } }) => (
+const renderTextFieldBody = ({ input, label, meta: { touched, error } }) => (
     <TextField
       hintText={label}
       multiLine={true}
@@ -32,10 +32,10 @@ const renderTextFieldBody = ({ body, input, label, meta: { touched, error } }) =
   )
 
 class EditCommentForm extends React.Component {
-  
+
 
 render () {
-  const { comments, updateComment, history } = this.props
+  const { valid, comments, updateComment, history } = this.props
   return (
     <div>
       <FloatingActionButton mini children={<Back/>} onClick={() => {
@@ -48,12 +48,11 @@ render () {
           <form >
             <div>
             <Field
-              body={comments.body}
               validate={required}
               ref='bodyInput' name="body" component={renderTextFieldBody} label="Body" />
             </div>
           </form>
-          <RaisedButton primary type="submit" label='submit' onClick={()=> {
+          <RaisedButton disabled={!valid? true:false} primary type="submit" label='submit' onClick={()=> {
           let input = {
             id: comments.id,
             parentId: comments.parentId,
