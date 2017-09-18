@@ -1,69 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {createComment} from '../Actions/commentsActions'
+import { renderTextField, renderTextFieldBody, required} from '../Utils/helpers'
+import { createComment } from '../Actions/commentsActions'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Back from 'mui-icons/fontawesome/arrow-left'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 import { Field, reduxForm } from 'redux-form'
 
 
-const required = value => (value ? undefined : 'Required')
-
-const renderTextField = ({ input, label, meta: { touched, error } }) => (
-  <TextField hintText={label}
-    floatingLabelText={label}
-    fullWidth
-    errorText={touched && error}
-    {...input}
-
-  />
-)
-
-const renderTextFieldBody = ({ input, label, meta: { touched, error } }) => (
-  <TextField hintText={label}
-    floatingLabelText={label}
-    fullWidth
-    multiLine
-    errorText={touched && error}
-    {...input}
-  />
-)
+//const required = value => (value ? undefined : 'Required')
 
 class AddComment extends React.Component {
 
   render(){
     const { valid, createComment, history, reset } = this.props
     return (
-      <div>
-        <FloatingActionButton mini children={<Back/>} onClick={() => {
+    <div>
+      <FloatingActionButton mini children={<Back/>} onClick={() => {
         history.goBack()
       }}/>
       <div className='center'>
-      <h2 className='row text-align-center'>Add a comment</h2>
-      <form id="formAddComment" >
-        <div>
-        <Field  validate={required} ref='authorInput' name="author" component={renderTextField} label="Author"/>
-        </div>
-        <div>
-        <Field  validate={required} ref='bodyInput' name="body" component={renderTextFieldBody} label="Body"/>
-        </div>
-
-      </form>
-
-    <RaisedButton primary disabled={!valid? true:false} type="submit" label='submit' onClick={()=> {
-
-      let input = {
-        id: Math.random().toString(36).substr(-8),
-        timestamp: Date.now(),
-        body: this.refs.bodyInput.value,
-        author: this.refs.authorInput.value,
-        parentId: this.props.match.params.parentId
-      }
-      createComment(input)
-      reset()
-    }}/>
-    </div>
+        <h2 className='row text-align-center'>Add a comment</h2>
+        <form id="formAddComment" >
+          <Field  validate={required} ref='authorInput' name="author" component={renderTextField} label="Author"/>
+          <Field  validate={required} ref='bodyInput' name="body" component={renderTextFieldBody} label="Body"/>
+        </form>
+        <RaisedButton primary disabled={!valid? true:false} type="submit" label='submit' onClick={()=> {
+        let input = {
+          id: Math.random().toString(36).substr(-8),
+          timestamp: Date.now(),
+          body: this.refs.bodyInput.value,
+          author: this.refs.authorInput.value,
+          parentId: this.props.match.params.parentId
+        }
+        createComment(input)
+        reset()
+        }}/>
+      </div>
   </div>
     )
   }
@@ -72,11 +45,10 @@ class AddComment extends React.Component {
 AddComment = reduxForm({
   form: 'addComment'
 })(AddComment)
+
 // Map state to props
-const mapStateToProps = (state, ownProps) => {
-    return {
-      comments: state.comments
-    }
+const mapStateToProps = ({commentsReducer}) => {
+    return {commentsReducer}
 }
 
 
