@@ -33,6 +33,10 @@ input, textarea, select {
 .display-flex{
   display: flex;
 }
+.btn {
+  display: flex;
+
+}
 .container {
   margin: 0 auto;
   max-width: 100%;
@@ -70,9 +74,10 @@ input, textarea, select {
 .padding {
   padding: 10px;
 }
-.margin{
+.margin, .btn-margin{
   margin:10px;
 }
+
 .text-align-right {
   text-align: right;
 }
@@ -86,4 +91,13 @@ input, textarea, select {
 
 .border-bottom{
   border-bottom: 1px solid lightgrey;
+}
+
+@media screen and (max-width: 810px) {
+  .display-flex {
+    display:grid;
+  }
+  .btn-margin{
+      margin-left:0;
+  }
 }

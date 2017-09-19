@@ -14,13 +14,13 @@ class EditDelete extends React.Component{
     return(
         <div className='col-4'>
           {post && (
-          <div className='margin display-flex'>
-            <div className='margin'>
+          <div className='btn-margin btn'>
+            <div className='btn-margin'>
               <RaisedButton style={{width:'120px'}} label='Edit' primary containerElement={<Link to={`/edit/${post.id}`}/>}>
                 <Pencil style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
               </RaisedButton>
             </div>
-            <div className='margin'>
+            <div className='btn-margin'>
               <RaisedButton style={{width:'120px'}} label='Delete' primary onClick={e => {
                 e.preventDefault()
                 deleteItem(post)

@@ -15,13 +15,13 @@ class EditDeleteComment extends React.Component{
     return(
       <div className='col-4'>
         {comment && (
-        <div className='display-flex'>
-          <div className='margin'>
+        <div className='btn btn-margin'>
+          <div className='btn-margin'>
             <RaisedButton style={{width:'120px'}} label='Edit' primary containerElement={<Link to={`/editcomment/${comment.id}`}/>}>
               <Pencil style={{height:'13px' ,textDecoration: 'none', color:'white' }}/>
             </RaisedButton>
           </div>
-          <div className='margin'>
+          <div className='btn-margin'>
             <RaisedButton  style={{width:'120px'}} label='Delete' primary onClick={e => {
               e.preventDefault()
               deleteComment(comment)
