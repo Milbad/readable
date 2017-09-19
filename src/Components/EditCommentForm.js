@@ -3,36 +3,13 @@ import {updateComment} from '../Actions/commentsActions'
 import { withRouter  } from 'react-router'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
-import TextField from 'material-ui/TextField'
+import { getBody, renderTextFieldBody, required} from '../Utils/helpers'
 import Back from 'mui-icons/fontawesome/arrow-left'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Field, reduxForm } from 'redux-form'
 
-const required = value => (value ? undefined : 'Required')
-
-
-const getBody = (comments,id) => {
-  if(comments && id){
-    let bodyInit = comments.find(item =>item.id === id)
-    if (bodyInit){
-      return(bodyInit.body)
-    }
-  }
-}
-
-const renderTextFieldBody = ({ input, label, meta: { touched, error } }) => (
-    <TextField
-      hintText={label}
-      multiLine={true}
-      fullWidth={true}
-      floatingLabelText={label}
-      errorText={touched && error}
-      {...input}
-  />
-  )
 
 class EditCommentForm extends React.Component {
-
 
 render () {
   const { valid, comments, updateComment, history } = this.props
@@ -46,11 +23,9 @@ render () {
         <div className='center'>
           <h2 className='row text-align-center'>Edit a Comment</h2>
           <form >
-            <div>
             <Field
               validate={required}
               ref='bodyInput' name="body" component={renderTextFieldBody} label="Body" />
-            </div>
           </form>
           <RaisedButton disabled={!valid? true:false} primary type="submit" label='submit' onClick={()=> {
           let input = {
@@ -60,7 +35,6 @@ render () {
           };
           updateComment(input);
         }}/>
-
     </div>
     )}
   </div>

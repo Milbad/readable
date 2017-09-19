@@ -25,7 +25,7 @@ class CatPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     filter: state.filter
   }

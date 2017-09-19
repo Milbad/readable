@@ -10,9 +10,7 @@ import {deleteItem} from '../Actions/postsActions'
 class EditDelete extends React.Component{
 
   render(){
-
     const {post, deleteItem} = this.props
-
     return(
         <div className='col-4'>
           {post && (
@@ -43,8 +41,6 @@ const mapStateToProps = (state, props) => {
     post:props.post
   }
 }
-
-
 
 
 export default connect(mapStateToProps, {deleteItem})(EditDelete)

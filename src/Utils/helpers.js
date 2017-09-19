@@ -12,6 +12,24 @@ export function getdate(timestamp) {
   }
 }
 
+export function getBody(comments,id) {
+  if(comments && id){
+    let bodyInit = comments.find(item =>item.id === id)
+    if (bodyInit){
+      return(bodyInit.body)
+    }
+  }
+}
+
+export function getTitle(posts,id)  {
+  if(posts && id){
+    let titleInit = posts.find(item =>item.id === id)
+    if (titleInit){
+      return(titleInit.title)
+    }
+  }
+}
+
 export const required = value => (value ? undefined : 'Required')
 
 export function renderTextFieldBody ({ input, label, meta: { touched, error }}){
