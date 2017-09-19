@@ -1,14 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 import { renderTextField, renderTextFieldBody, required} from '../Utils/helpers'
 import { createComment } from '../Actions/commentsActions'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Back from 'mui-icons/fontawesome/arrow-left'
 import RaisedButton from 'material-ui/RaisedButton'
-import { Field, reduxForm } from 'redux-form'
-
-
-//const required = value => (value ? undefined : 'Required')
 
 class AddComment extends React.Component {
 
@@ -46,10 +43,5 @@ AddComment = reduxForm({
   form: 'addComment'
 })(AddComment)
 
-// Map state to props
-const mapStateToProps = ({commentsReducer}) => {
-    return {commentsReducer}
-}
 
-
-export default connect(mapStateToProps, {createComment})(AddComment);
+export default connect(null, {createComment})(AddComment);

@@ -1,5 +1,6 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
+import SelectField from 'material-ui/SelectField'
 
 export function getdate(timestamp) {
   if (timestamp) {
@@ -33,5 +34,19 @@ export function renderTextField ({ input, label, meta: { touched, error }}) {
     errorText={touched && error}
     {...input}
   />
+  )
+}
+
+export function renderSelectField ({ input, ref, label, meta: { touched, error }, children}) {
+  return (
+    <SelectField
+    fullWidth
+    ref= {ref}
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    onChange={(event, index, value) => input.onChange(value)}
+    children={children}
+    />
   )
 }

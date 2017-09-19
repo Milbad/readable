@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {postsReducer, postReducer} from './postReducer'
-import {categoriesReducer} from './catReducer'
+import {categoriesReducer} from './categoriesReducer'
 import {commentsReducer} from './commentsReducer'
 import {filterReducer} from './filtersReducer'
 import {sortByReducer, sortByCommentReducer } from './sortByReducer'
