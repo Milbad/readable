@@ -1,9 +1,11 @@
 {
+  "homepage": "https://MilBad.github.io/readable",
   "name": "readable",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "font-awesome": "^4.7.0",
+    "gh-pages": "^1.0.0",
     "material-ui": "^0.19.1",
     "mui-icons": "^1.2.1",
     "react": "^15.6.1",
@@ -19,7 +21,10 @@
     "redux-thunk": "^2.2.0",
     "sort-by": "^1.2.0"
   },
+
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
